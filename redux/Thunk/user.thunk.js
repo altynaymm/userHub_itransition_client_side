@@ -4,7 +4,7 @@ import {authentication} from '../user.slice';
 
 export const checkSession = createAsyncThunk('/auth/checkSession', async(_, {dispatch}) => {
     try {
-        const response = await fetch('http://localhost:3000/check-session', {
+        const response = await fetch('https://userhub-itransition-db40c4fa7fa7.herokuapp.com/check-session', {
             credentials: 'include'
         }); 
         const data = await response.json();
@@ -23,7 +23,7 @@ export const checkSession = createAsyncThunk('/auth/checkSession', async(_, {dis
 
 export const registerUser = createAsyncThunk('auth/registerUser', async (userData, {dispatch}) => {
   
-      const response = await fetch('http://localhost:3000/sign-up', {
+      const response = await fetch('https://userhub-itransition-db40c4fa7fa7.herokuapp.com/sign-up', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -46,7 +46,7 @@ export const registerUser = createAsyncThunk('auth/registerUser', async (userDat
 
   export const signInUser = createAsyncThunk('auth/signInUser', async (userData, {dispatch}) => {
   
-    const response = await fetch('http://localhost:3000/sign-in', {
+    const response = await fetch('https://userhub-itransition-db40c4fa7fa7.herokuapp.com/sign-in', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -68,7 +68,7 @@ export const registerUser = createAsyncThunk('auth/registerUser', async (userDat
 });
 
 export const getUsersList = createAsyncThunk('auth/usersList', async () => {
-    const response = await fetch('http://localhost:3000/users');
+    const response = await fetch('https://userhub-itransition-db40c4fa7fa7.herokuapp.com/users');
     console.log(response);
     
     if (!response.ok) {
@@ -78,7 +78,7 @@ export const getUsersList = createAsyncThunk('auth/usersList', async () => {
 });
 
 export const getUserLogOut = createAsyncThunk('auth/logOut', async () => {
-    const response = await fetch('http://localhost:3000/logout', {
+    const response = await fetch('https://userhub-itransition-db40c4fa7fa7.herokuapp.com/logout', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
@@ -95,7 +95,7 @@ export const getUserLogOut = createAsyncThunk('auth/logOut', async () => {
 
 
 export const deleteUser = createAsyncThunk('/auth/deleteUser', async(usersId) => {
-    const response = await fetch('http://localhost:3000/delete-user', {
+    const response = await fetch('https://userhub-itransition-db40c4fa7fa7.herokuapp.com/delete-user', {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -109,7 +109,7 @@ export const deleteUser = createAsyncThunk('/auth/deleteUser', async(usersId) =>
 })
 
 export const blockUsers = createAsyncThunk('/auth/blockUser', async(usersId) => {
-    const response = await fetch('http://localhost:3000/block-user', {
+    const response = await fetch('https://userhub-itransition-db40c4fa7fa7.herokuapp.com/block-user', {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
@@ -123,7 +123,7 @@ export const blockUsers = createAsyncThunk('/auth/blockUser', async(usersId) => 
 })
 
 export const unblockUsers = createAsyncThunk('/auth/unblockUser', async(usersId) => {
-    const response = await fetch('http://localhost:3000/unblock-user', {
+    const response = await fetch('https://userhub-itransition-db40c4fa7fa7.herokuapp.com/unblock-user', {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
