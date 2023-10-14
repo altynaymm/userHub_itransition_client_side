@@ -69,7 +69,9 @@ export const registerUser = createAsyncThunk('auth/registerUser', async (userDat
 });
 
 export const getUsersList = createAsyncThunk('auth/usersList', async () => {
-    const response = await fetch('https://userhub-itransition-db40c4fa7fa7.herokuapp.com/users');
+    const response = await fetch('https://userhub-itransition-db40c4fa7fa7.herokuapp.com/users,', {
+      credentials: 'include'
+    });
     console.log(response);
     
     if (!response.ok) {
@@ -101,7 +103,8 @@ export const deleteUser = createAsyncThunk('/auth/deleteUser', async(usersId) =>
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ usersId })
+        body: JSON.stringify({ usersId }),
+        credentials: 'include'
     })
     if (!response.ok) {
         throw new Error('Failed to delete user');
@@ -115,7 +118,8 @@ export const blockUsers = createAsyncThunk('/auth/blockUser', async(usersId) => 
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ usersId })
+        body: JSON.stringify({ usersId }),
+        credentials: 'include'
     })
     if (!response.ok) {
         throw new Error('Failed to block user');
@@ -129,7 +133,8 @@ export const unblockUsers = createAsyncThunk('/auth/unblockUser', async(usersId)
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ usersId })
+        body: JSON.stringify({ usersId }),
+        credentials: 'include'
     })
     if (!response.ok) {
         throw new Error('Failed to unblock user');
