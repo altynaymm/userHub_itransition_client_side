@@ -4,7 +4,7 @@ import {authentication} from '../user.slice';
 
 export const checkSession = createAsyncThunk('/auth/checkSession', async(_, {dispatch}) => {
     try {
-        const response = await fetch('https://userhub-itransition-db40c4fa7fa7.herokuapp.com/check-session', {
+        const response = await fetch('https://userhub-itransition-db40c4fa7fa7.herokuapp.com/api/check-session', {
             credentials: 'include'
         }); 
         const data = await response.json();
@@ -23,7 +23,7 @@ export const checkSession = createAsyncThunk('/auth/checkSession', async(_, {dis
 
 export const registerUser = createAsyncThunk('auth/registerUser', async (userData, {dispatch}) => {
   
-      const response = await fetch('https://userhub-itransition-db40c4fa7fa7.herokuapp.com/sign-up', {
+      const response = await fetch('https://userhub-itransition-db40c4fa7fa7.herokuapp.com/api/sign-up', {
 
         method: 'POST',
         headers: {
@@ -47,7 +47,7 @@ export const registerUser = createAsyncThunk('auth/registerUser', async (userDat
 
   export const signInUser = createAsyncThunk('auth/signInUser', async (userData, {dispatch}) => {
   
-    const response = await fetch('https://userhub-itransition-db40c4fa7fa7.herokuapp.com/sign-in', {
+    const response = await fetch('https://userhub-itransition-db40c4fa7fa7.herokuapp.com/api/sign-in', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -69,7 +69,7 @@ export const registerUser = createAsyncThunk('auth/registerUser', async (userDat
 });
 
 export const getUsersList = createAsyncThunk('auth/usersList', async () => {
-    const response = await fetch('https://userhub-itransition-db40c4fa7fa7.herokuapp.com/users,', {
+    const response = await fetch('https://userhub-itransition-db40c4fa7fa7.herokuapp.com/api/users,', {
       credentials: 'include'
     });
     console.log(response);
