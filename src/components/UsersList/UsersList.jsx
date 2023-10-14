@@ -81,7 +81,7 @@ export default function UsersList() {
   console.log(isAuthenticate);
 
   if (!isAuthenticate && !isLoading) {
-    navigate('/sign-in');
+    navigate('/');
   }
 
  
