@@ -8,8 +8,6 @@ export default defineConfig(
       proxy: {
         '/api': 'https://userhub-itransition-db40c4fa7fa7.herokuapp.com/'
       }
-    }
-  }
-  ,{
+    },
   plugins: [react()],
 })
