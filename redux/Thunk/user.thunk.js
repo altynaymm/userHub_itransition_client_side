@@ -24,7 +24,7 @@ export const checkSession = createAsyncThunk('/auth/checkSession', async(_, {dis
 
 export const registerUser = createAsyncThunk('auth/registerUser', async (userData, {dispatch}) => {
   
-      const response = await fetch('https://userhub-itransition-db40c4fa7fa7.herokuapp.com/api/sign-up', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/sign-up`, {
 
         method: 'POST',
         headers: {
@@ -70,7 +70,7 @@ export const registerUser = createAsyncThunk('auth/registerUser', async (userDat
 });
 
 export const getUsersList = createAsyncThunk('auth/usersList', async () => {
-    const response = await fetch('https://userhub-itransition-db40c4fa7fa7.herokuapp.com/api/users,', {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/users`, {
       credentials: 'include'
     });
     console.log(response);
@@ -82,7 +82,7 @@ export const getUsersList = createAsyncThunk('auth/usersList', async () => {
 });
 
 export const getUserLogOut = createAsyncThunk('auth/logOut', async () => {
-    const response = await fetch('https://userhub-itransition-db40c4fa7fa7.herokuapp.com/logout', {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/logout`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
@@ -99,7 +99,7 @@ export const getUserLogOut = createAsyncThunk('auth/logOut', async () => {
 
 
 export const deleteUser = createAsyncThunk('/auth/deleteUser', async(usersId) => {
-    const response = await fetch('https://userhub-itransition-db40c4fa7fa7.herokuapp.com/delete-user', {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/delete-user`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -114,7 +114,7 @@ export const deleteUser = createAsyncThunk('/auth/deleteUser', async(usersId) =>
 })
 
 export const blockUsers = createAsyncThunk('/auth/blockUser', async(usersId) => {
-    const response = await fetch('https://userhub-itransition-db40c4fa7fa7.herokuapp.com/block-user', {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/block-user`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
@@ -129,7 +129,7 @@ export const blockUsers = createAsyncThunk('/auth/blockUser', async(usersId) => 
 })
 
 export const unblockUsers = createAsyncThunk('/auth/unblockUser', async(usersId) => {
-    const response = await fetch('https://userhub-itransition-db40c4fa7fa7.herokuapp.com/unblock-user', {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/unblock-user`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
