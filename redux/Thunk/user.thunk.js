@@ -1,10 +1,11 @@
+/* eslint-disable no-undef */
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {authentication} from '../user.slice';
 
 
 export const checkSession = createAsyncThunk('/auth/checkSession', async(_, {dispatch}) => {
     try {
-        const response = await fetch('https://userhub-itransition-db40c4fa7fa7.herokuapp.com/api/check-session', {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/check-session`, {
             credentials: 'include'
         }); 
         const data = await response.json();
@@ -47,7 +48,7 @@ export const registerUser = createAsyncThunk('auth/registerUser', async (userDat
 
   export const signInUser = createAsyncThunk('auth/signInUser', async (userData, {dispatch}) => {
   
-    const response = await fetch('https://userhub-itransition-db40c4fa7fa7.herokuapp.com/api/sign-in', {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/sign-in`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
