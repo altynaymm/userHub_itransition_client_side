@@ -5,9 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig(
   {
     server: {
-      proxy: {
-        '/api': 'https://userhub-itransition-db40c4fa7fa7.herokuapp.com/'
-      }
+     
     },
   plugins: [react()],
 })
