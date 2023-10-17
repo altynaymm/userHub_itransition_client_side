@@ -7,12 +7,8 @@ export const checkSession = createAsyncThunk('/auth/checkSession', async(_, {dis
   try {
     
       const token = localStorage.getItem('jwt');
-      if (!token) {
-          dispatch(getUserLogOut());
-          return;
-      }
-
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/check-session`, {
+       
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/check-user`, {
           headers: {
               'Authorization': `Bearer ${token}`
           },
@@ -21,11 +17,12 @@ export const checkSession = createAsyncThunk('/auth/checkSession', async(_, {dis
 
       const data = await response.json();
 
-      if (data.email) {
+      if (data) {
           dispatch(authentication(data));
-      } else {
-          dispatch(getUserLogOut());
-      }
+      } 
+      // else {
+      //     dispatch(getUserLogOut());
+      // }
   } catch (error) {
       console.error("Error while checking session:", error);
   }
@@ -50,8 +47,8 @@ export const registerUser = createAsyncThunk('auth/registerUser', async (userDat
   
       if (data.token) {
         localStorage.setItem('jwt', data.token);
-        dispatch(authentication(data.user));
-      } else {
+        dispatch(authentication(data));
+      } else  {
         throw new Error('Registration failed');
       }
    
@@ -72,9 +69,9 @@ export const registerUser = createAsyncThunk('auth/registerUser', async (userDat
     console.log(data);
     
 
-    if (data.token) {
+    if (data) {
       localStorage.setItem('jwt', data.token);
-      dispatch(authentication(data.user));
+      dispatch(authentication(data));
     } else {
       throw new Error('Authentication failed');
     }
@@ -94,9 +91,9 @@ export const getUsersList = createAsyncThunk('auth/usersList', async () => {
 });
 
 export const getUserLogOut = createAsyncThunk('auth/logOut', async () => {
-  localStorage.removeItem('token');
+  localStorage.removeItem('jwt');
 
-  window.location = '/sign-in';
+  window.location = '/';
 });
 
 
