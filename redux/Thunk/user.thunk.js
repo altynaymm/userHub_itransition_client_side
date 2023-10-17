@@ -45,7 +45,7 @@ export const registerUser = createAsyncThunk('auth/registerUser', async (userDat
       console.log(data);
       
   
-      if (data.token) {
+      if (data) {
         localStorage.setItem('jwt', data.token);
         dispatch(authentication(data));
       } else  {
