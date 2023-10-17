@@ -4,23 +4,33 @@ import {authentication} from '../user.slice';
 
 
 export const checkSession = createAsyncThunk('/auth/checkSession', async(_, {dispatch}) => {
-    try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/check-session`, {
-            credentials: 'include'
-        }); 
-        const data = await response.json();
-  
-        if (data.email) {
-          dispatch(authentication(data));
-        } else {
+  try {
+    
+      const token = localStorage.getItem('jwt');
+      if (!token) {
           dispatch(getUserLogOut());
-        }
-      } catch (error) {
-        console.error("Error while checking session:", error);
+          return;
       }
-    }
-  
-)
+
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/check-session`, {
+          headers: {
+              'Authorization': `Bearer ${token}`
+          },
+          credentials: 'include'
+      }); 
+
+      const data = await response.json();
+
+      if (data.email) {
+          dispatch(authentication(data));
+      } else {
+          dispatch(getUserLogOut());
+      }
+  } catch (error) {
+      console.error("Error while checking session:", error);
+  }
+});
+
 
 export const registerUser = createAsyncThunk('auth/registerUser', async (userData, {dispatch}) => {
   
@@ -38,8 +48,9 @@ export const registerUser = createAsyncThunk('auth/registerUser', async (userDat
       console.log(data);
       
   
-      if (data) {
-        dispatch(authentication(data));
+      if (data.token) {
+        localStorage.setItem('jwt', data.token);
+        dispatch(authentication(data.user));
       } else {
         throw new Error('Registration failed');
       }
@@ -61,8 +72,9 @@ export const registerUser = createAsyncThunk('auth/registerUser', async (userDat
     console.log(data);
     
 
-    if (data) {
-      dispatch(authentication(data));
+    if (data.token) {
+      localStorage.setItem('jwt', data.token);
+      dispatch(authentication(data.user));
     } else {
       throw new Error('Authentication failed');
     }
@@ -82,19 +94,9 @@ export const getUsersList = createAsyncThunk('auth/usersList', async () => {
 });
 
 export const getUserLogOut = createAsyncThunk('auth/logOut', async () => {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/logout`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-       credentials: 'include'
-    });
-   
-    
-    if (!response.ok) {
-        throw new Error('Failed to log out');
-    }
-    return response.json();
+  localStorage.removeItem('token');
+
+  window.location = '/sign-in';
 });
 
 
